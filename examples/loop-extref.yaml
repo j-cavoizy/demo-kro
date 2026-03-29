@@ -1,0 +1,30 @@
+apiVersion: kro.run/v1alpha1
+kind: ResourceGraphDefinition
+metadata:
+  name: configmapgroup-extref
+spec:
+  schema:
+    apiVersion: v1alpha1
+    kind: ConfPoolExtRef
+    spec:
+      confs: "[]string"
+  resources:
+    - id: sharedConfig
+      externalRef:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: config-kro
+          namespace: default
+
+    - id: configMaps
+      forEach:
+        - conf: ${schema.spec.confs}
+      template:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: ${schema.metadata.name + "-" + conf}
+          namespace: default
+        data:
+          data: ${sharedConfig.?data.?data}

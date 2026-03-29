@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-kro
+  namespace: default
+data: 
+  data: "This is the way"

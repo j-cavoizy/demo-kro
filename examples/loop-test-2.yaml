@@ -1,0 +1,13 @@
+apiVersion: kro.run/v1alpha1
+kind: ConfPool2
+metadata:
+  name: conftest2
+  namespace: default
+spec:
+  confs:
+    - name: "first"
+      data: "rouge"
+    - name: "second"
+      data: "bleu"
+    - name: "third"
+      data: "orange"
